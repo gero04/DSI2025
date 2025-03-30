@@ -1,0 +1,87 @@
+@startuml
+
+class Pipsha {
+precioFinal
+
+crearPipsha()
+mostrarPipsha()
+}
+
+class TipoDePipsha {
+nombre
+descripcion
+
+crearTipoDePipsha()
+mostrarTipoDePipsha()
+}
+
+class TamañoDePipsha {
+nombre
+descripcion
+
+crearTamañoDePipsha()
+mostrarTamañoDePipsha()
+}
+
+class IngredienteDePipsha {
+nombre
+descripcion
+
+crearIngredienteDePipsha()
+mostrarIngredienteDePipsha()
+}
+
+class Pedido {
+numeroDePedido
+nombreDeCliente
+fechaHoraDeCreacion
+fechaHoraDeEntrega
+
+crearPedido()
+mostrarPedido()
+calcularTotal()
+}
+
+class DetalleDePedido {
+producto
+cantidad
+precio
+
+crearDetalleDePedido()
+mostrarDetalleDePedido()
+calcularSubtotal()
+}
+
+class Factura {
+numeroDeFactura
+fechaHoraDeEmision
+importe
+observaciones
+
+crearFactura()
+mostrarFactura()
+}
+
+class Estado {
+ambito
+descripcion
+
+crearEstado()
+mostrarEstado()
+esAmbitoPedido()
+esAmbitoFactura()
+esCancelado()
+}
+
+
+Pipsha --> "1" TipoDePipsha : "tipoDePipsha"
+Pipsha --> "1" TamañoDePipsha : "tamañoDePipsha"
+Pipsha *-- "1..*" IngredienteDePipsha : "ingredienteDePipsha"
+Pedido o-- "1..*" DetalleDePedido : "detalleDePedido"
+DetalleDePedido --> "1" Pipsha : "pipsha"
+DetalleDePedido --> "1" Estado : "estadoDetalleDePedido"
+Pedido --> "1" Factura : "factura"
+Pedido --> "1" Estado : "estadoPedido"
+Factura --> "1" Estado : "estadoFactura"
+
+@enduml

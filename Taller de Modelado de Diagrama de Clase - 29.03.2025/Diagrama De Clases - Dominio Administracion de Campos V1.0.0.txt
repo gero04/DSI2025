@@ -1,0 +1,200 @@
+@startuml
+
+class Campo {
+numeroDeCampo
+nombre
+ubicacionGeoSatelital
+
+crearCampo()
+mostrarCampo()
+}
+
+class Lote {
+numeroDeLote
+superficie
+
+crearLote()
+mostrarLote()
+}
+
+class TipoDeSuelo {
+numeroDeTipoDeSuelo
+definicionNacional
+
+crearTipoDeSuelo()
+mostrarTipoDeSuelo()
+}
+
+class Cultivo {
+nombre
+descripcion
+
+crearCultivo()
+mostrarCultivo()
+}
+
+class PlanProyectoDeCultivo {
+nombre
+descripcion
+
+crearPlanProyectoDeCultivo()
+mostrarPlanProyectoDeCultivo()
+}
+
+class ProyectoDeCultivo {
+fechaDeInicio
+fechaDeFin
+idProyecto
+descripcion
+
+crearProyectoDeCultivo()
+mostrarProyectoDeCultivo()
+calcularDuracionDeProyecto()
+}
+
+class OrdenDeLaboreo {
+fechaHoraInicio
+fechaHoraFin
+descripcion
+
+crearOrdenDeLaboreo()
+mostrarOrdenDeLaboreo()
+}
+
+class TipoDeLaboreo {
+numero
+descripcion
+duracionEstimada
+
+crearTipoDeLaboreo()
+mostrarTipoDeLaboreo()
+}
+
+class Plaga {
+nombre
+
+crearPlaga()
+mostrarPlaga()
+setNombre()
+getNombre()
+}
+
+class Tratamiento {
+nombre
+
+crearTratamiento()
+mostrarTratamiento()
+}
+
+class Agroquimico {
+nombre
+dosisPorHectarea
+
+crearAgroquimico()
+mostrarAgroquimico()
+}
+
+class SituacionAnormal {
+nombre
+
+crearSituacionAnormal()
+mostrarSituacionAnormal()
+}
+
+
+
+
+
+
+class Usuario {
+fechaDeAlta
+username
+password
+
+crearUsuario()
+mostrarUsuario()
+}
+
+class Perfil {
+nombre
+
+crearPerfil()
+mostrarPerfil()
+}
+
+class Permiso {
+nombre
+
+crearPermiso()
+mostrarPermiso()
+}
+
+class Estado {
+ambito
+nombre
+
+crearEstado()
+mostrarEstado()
+esAmbito()
+}
+
+class HistorialDeEstado {
+fechaHoraDeInicio
+crearHistorialDeEstado()
+mostrarHistorialDeEstado()
+}
+
+class Monitoreo {
+rendimientoDeGrano
+humedadDeGrano
+cantidadDeCombustible
+
+crearMonitoreo()
+mostrarMonitoreo()
+}
+
+
+
+
+
+
+
+
+class Cosechadora {
+marca
+modelo
+anioDeFabricacion
+capacidad
+kilometros
+
+crearCosechadora()
+mostrarCosechadora()
+}
+
+Campo *-l- "1..*" Lote : "lote"
+Lote --> "1" TipoDeSuelo : "tipoDeSuelo"
+Usuario -up-> "1" Perfil : "perfil"
+Usuario --> "1" PlanProyectoDeCultivo : "proyectoDeCultivo"
+Usuario -up-> "1..*" Monitoreo : "monitoreo"
+Perfil --> "1" Permiso : "permiso"
+Monitoreo --> "1" Cosechadora : "cosechadora"
+PlanProyectoDeCultivo --> "1" Lote : "lote"
+PlanProyectoDeCultivo --> "1" Cultivo : "cultivo"
+PlanProyectoDeCultivo --> "1" ProyectoDeCultivo : "proyectoDeCultivo"
+
+Tratamiento --> "1..*" Plaga : "plaga"
+Tratamiento --> "1" Agroquimico : "agroquimico"
+HistorialDeEstado --> "1" Estado : "estado"
+
+ProyectoDeCultivo --> "1" HistorialDeEstado : "historialDeEstado"
+ProyectoDeCultivo o-- "1..*" OrdenDeLaboreo : "ordenDeLaboreo"
+ProyectoDeCultivo --> "1" SituacionAnormal : "situacionAnormal"
+OrdenDeLaboreo --> "1" HistorialDeEstado : "historialDeEstado"
+OrdenDeLaboreo --> "1" TipoDeLaboreo : "tipoDeLaboreo"
+Cultivo --> "1..*" Tratamiento : "tratamiento"
+
+
+
+@enduml
+
+

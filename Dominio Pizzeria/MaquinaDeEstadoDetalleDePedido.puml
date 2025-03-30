@@ -1,0 +1,21 @@
+@startuml DetalleDePedido
+hide empty description
+
+[*] --> PendienteDePreparacion 
+PendienteDePreparacion --> PendienteDePreparacion : Modificar detalle de pedido \n añadirElemento() / eliminarElemento()
+
+PendienteDePreparacion --> EnPreparacion : Actualizar pedido \n / actualizar()
+EnPreparacion --> PendienteDeFacturacion : Actualizar pedido \n / actualizar()
+PendienteDePreparacion --> Cancelado : Registrar cancelacion \n / cancelar()
+EnPreparacion --> Cancelado : Registrar cancelacion \n / cancelar()
+PendienteDeFacturacion --> Cancelado : Registrar cancelacion \n / cancelar()
+Cancelado --> [*]
+PendienteDeFacturacion --> Facturado : Registrar cobro de pedido \n / registrarCobro()
+Facturado --> [*]
+PendienteDePreparacion --> Eliminado : Eliminar elemento \n eliminar()
+Eliminado --> [*]
+
+
+
+
+@enduml
