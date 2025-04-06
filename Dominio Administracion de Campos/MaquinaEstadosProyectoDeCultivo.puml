@@ -1,0 +1,20 @@
+@startuml maquina de estados
+hide empty description
+
+[*] --> EnPreparacion : 1. Registrar proyecto de cultivo \n new()
+EnPreparacion --> Sembrado : 7. Registrar laboreo \n [es siembra = SI] \n registrarLaboreo()
+Sembrado --> PostSiembra : 7. Registrar laboreo \n [Nacimiento de cultivo = SI] \n registrarLaboreo()
+PostSiembra --> Cosechado : 7. Registrar laboreo \n [es cosecha = SI] \n registrarLaboreo() 
+Cosechado --> [*]
+
+EnPreparacion --> Cancelado : 2. Cancelar proyecto de cultivo \n cancelar()
+Sembrado --> Cancelado : 2. Cancelar proyecto de cultivo \n cancelar()
+PostSiembra --> Cancelado : 2. Cancelar proyecto de cultivo \n cancelar()
+Cancelado --> [*]
+
+Sembrado --> Sembrado : 4. Registrar cultivo \n [Nacimiento de cultivo = NO] \n registrarCultivo()
+EnPreparacion --> EnPreparacion : 7. Registrar laboreo \n [es siembra = NO] \n registrarLaboreo()
+PostSiembra --> PostSiembra : 7. Registrar laboreo \n [es cosecha = NO] \n registrarLaboreo()
+
+
+@enduml
